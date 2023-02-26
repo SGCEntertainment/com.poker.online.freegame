@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/King.unity
-    guid: 20dd6d644f347c84886fc23cfa65c7e1
+    path: Assets/com.poker.online.freegame/Scenes/game.unity
+    guid: 6c4bb4d0cd4b73842ad7deb94c9b3b47
   m_configObjects: {}

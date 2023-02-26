@@ -2,6 +2,9 @@ using UnityEngine;
 
 public enum CardValue
 {
+    [InspectorName("A")]
+    ace,
+
     [InspectorName("6")]
     six,
 
@@ -24,8 +27,5 @@ public enum CardValue
     queen,
 
     [InspectorName("K")]
-    king,
-
-    [InspectorName("T")]
-    ace
+    king
 }
