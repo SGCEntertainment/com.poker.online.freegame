@@ -12,8 +12,9 @@ public static class CardArrayExtension
         return IsP || IsC || IsT || IsB;
     }
 
-    public static bool IsContains(this Card[] cards, CardValue cardValue)
+    public static bool IsContains(this Card[] cards, CardValue cardValue, out Card findCard)
     {
-        return cards.Any(card => card.CardValue == cardValue);
+        findCard = cards.First(card => card.CardValue == cardValue);
+        return cards.All(card => card.CardValue == cardValue);
     }
 }

@@ -1,34 +1,32 @@
+using System.Collections.Generic;
+
 public static class Combination
 {
+    private static Card findCard;
+
     public static int IsRoyalFlush(Card[] cards)
     {
-        if(!cards.IsEqualsSuit())
-        {
-            return -1;
-        }
+        List<Card> sequence = new List<Card>();
 
-        bool Ace = cards.IsContains(CardValue.ace);
-        bool King = cards.IsContains(CardValue.king);
-        bool Queen = cards.IsContains(CardValue.queen);
-        bool Jack = cards.IsContains(CardValue.jack);
-        bool Ten = cards.IsContains(CardValue.ten);
+        if (cards.IsContains(CardValue.ace, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.king, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.queen, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.jack, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.ten, out findCard)) sequence.Add(findCard);
 
-        return Ace && King && Queen && Jack && Ten ? -1 : 10;
+        return sequence.Count == 5 && sequence.ToArray().IsEqualsSuit() ? 10 : -1;
     }
 
     public static int IsStraightFlush(Card[] cards)
     {
-        if (!cards.IsEqualsSuit())
-        {
-            return -1;
-        }
+        List<Card> sequence = new List<Card>();
 
-        bool King = cards.IsContains(CardValue.king);
-        bool Queen = cards.IsContains(CardValue.queen);
-        bool Jack = cards.IsContains(CardValue.jack);
-        bool Ten = cards.IsContains(CardValue.ten);
-        bool Nine = cards.IsContains(CardValue.nine);
+        if (cards.IsContains(CardValue.king, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.queen, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.jack, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.ten, out findCard)) sequence.Add(findCard);
+        if (cards.IsContains(CardValue.nine, out findCard)) sequence.Add(findCard);
 
-        return King && Queen && Jack && Ten && Nine ? -1 : 9;
+        return sequence.Count == 5 && sequence.ToArray().IsEqualsSuit() ? 9 : -1;
     }
 }
