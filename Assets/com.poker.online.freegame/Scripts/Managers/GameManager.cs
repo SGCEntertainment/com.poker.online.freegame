@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
         }
 
         enable = false;
-        GetWinner();
+        Debug.Log($"Winner: {GetWinner().name}");
     }
 
     private Player GetWinner()
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour
         }
 
         Card HighCard = Combination.GetHighCard(cards);
-        Debug.Log($"{HighCard.CardValue}({HighCard.CardSuit})");
-        return null;
+        return players.Where(player => player.cards.Contains(HighCard)).First();
     }
 }
