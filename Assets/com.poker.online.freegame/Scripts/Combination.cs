@@ -130,7 +130,7 @@ public static class Combination
         }
         else
         {
-            return (-1, "none");
+            return (1, "High card");
         }
     }
 
