@@ -133,4 +133,10 @@ public static class Combination
             return (-1, "none");
         }
     }
+
+    public static Card GetHighCard(Card[] cards)
+    {
+        var intGroup = cards.GroupBy(card => card.CardIntValue());
+        return cards[intGroup.Max().Key];
+    }
 }

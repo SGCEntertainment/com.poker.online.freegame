@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool enable;
-    [SerializeField] Card[] cards;
+    [SerializeField] Player[] players;
 
     private void OnValidate()
     {
@@ -13,7 +13,22 @@ public class GameManager : MonoBehaviour
         }
 
         enable = false;
-        (int rating, string name) = Combination.GetCombination(cards);
-        Debug.Log($"{name}({rating})");
+        GetWinner();
+    }
+
+    private Player GetWinner()
+    {
+        Card[] cards = new Card[players.Length * 2];
+        for(int i = 0; i < players.Length; i++)
+        {
+            for(int j = 0; j < 2; j++)
+            {
+                cards[i] = players[i].cards[j];
+            }
+        }
+
+        Card HighCard = Combination.GetHighCard(cards);
+        Debug.Log($"{HighCard.CardValue}({HighCard.CardSuit})");
+        return null;
     }
 }
