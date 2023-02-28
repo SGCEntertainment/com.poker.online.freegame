@@ -18,6 +18,16 @@ public static class CardExtension
         return cards.Any(card => card.CardValue == cardValue);
     }
 
+    public static bool IsContains(this Card[] cards, Card _card)
+    {
+        return cards.Select(c => c.CardValue == _card.CardValue).First();
+    }
+
+    public static Card GetMinCard(this Card[] cards, Card _card)
+    {
+        return cards.Where(c => c.CardValue != _card.CardValue).First();
+    }
+
     public static int CardIntValue(this Card card) => card.CardValue switch
     {
         CardValue.six => 6,

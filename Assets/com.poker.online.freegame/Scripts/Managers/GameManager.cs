@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
         }
 
         Card HighCard = Combination.GetHighCard(cards);
+        var winners = players.Where(player => player.cards.IsContains(HighCard)).ToArray();
+
+        if(winners.Length > 1)
+        {
+            Card[] tmp = winners.Select(c => c.cards.GetMinCard(HighCard)).ToArray();
+            HighCard = Combination.GetHighCard(tmp);
+        }
+
         return players.Where(player => player.cards.Contains(HighCard)).First();
     }
 }
