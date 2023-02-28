@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 5
+  CardValue: 8
   CardSuit: 3
 --- !u!4 &1703329017014109276
 Transform:
@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 2
+  CardValue: 7
   CardSuit: 2
 --- !u!212 &2087104710365618575
 SpriteRenderer:
@@ -1288,8 +1288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 8
-  CardSuit: 1
+  CardValue: 5
+  CardSuit: 3
 --- !u!212 &3833976471233426847
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1455,8 +1455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 1
-  CardSuit: 1
+  CardValue: 4
+  CardSuit: 3
 --- !u!1 &4290521131576475220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 8
+  CardValue: 6
   CardSuit: 3
 --- !u!4 &4361081550452043846
 Transform:
@@ -1515,8 +1515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 5
-  CardSuit: 3
+  CardValue: 0
+  CardSuit: 1
 --- !u!1 &6293845892409281173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a601848a74715a43a8ab4acbc99cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 8
+  CardValue: 7
   CardSuit: 3
 --- !u!4 &6469231203960722974
 Transform:

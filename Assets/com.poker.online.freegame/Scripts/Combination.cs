@@ -56,16 +56,37 @@ public static class Combination
         return group.ContainsValue(3) ? 5 : -1;
     }
 
-    public static int IsStraight(Card[] cardset)
+    private static int IsStraight()
     {
-        var intGroup = cardset.Select(card => card.CardIntValue());
-        UnityEngine.Debug.Log(intGroup.Count());
-        foreach (int i in intGroup)
-        {
-            //UnityEngine.Debug.Log(i);
-        }
-        var group = cards.GroupBy(c => c.CardValue).ToDictionary(y => y.Key, y => y.Count());
-        return group.ContainsValue(3) ? 4 : -1;
+        var intGroup = cards.Select(card => card.CardIntValue());
+        int min = intGroup.Min();
+
+        bool second = intGroup.Contains(min + 1);
+        bool third = intGroup.Contains(min + 2);
+        bool four = intGroup.Contains(min + 3);
+        bool five = intGroup.Contains(min + 4);
+
+        return second && third && four && five ? 4 : -1;
+    }
+
+    private static int IsTwoPair()
+    {
+        var intGroup = cards.Select(card => card.CardIntValue());
+
+        var duplicateGroup = intGroup.GroupBy(i => i).ToDictionary(y => y.Key, y => y.Count());
+        int pairCount = duplicateGroup.Where(i => i.Value == 2).Count();
+
+        return pairCount == 2 ? 3 : -1;
+    }
+
+    public static int IsPair()
+    {
+        var intGroup = cards.Select(card => card.CardIntValue());
+
+        var duplicateGroup = intGroup.GroupBy(i => i).ToDictionary(y => y.Key, y => y.Count());
+        int pairCount = duplicateGroup.Where(i => i.Value == 2).Count();
+
+        return pairCount == 1 ? 2 : -1;
     }
 
     public static (int,string) GetCombination(Card[] _cards)
@@ -95,10 +116,18 @@ public static class Combination
         {
             return (IsThreeOfKind(), "Three of a kind");
         }
-        //else if (IsStraight() > 0)
-        //{
-        //    return (IsStraight(), "Straight");
-        //}
+        else if (IsStraight() > 0)
+        {
+            return (IsStraight(), "Straight");
+        }
+        else if (IsTwoPair() > 0)
+        {
+            return (IsTwoPair(), "TwoPair");
+        }
+        else if (IsPair() > 0)
+        {
+            return (IsPair(), "Pair");
+        }
         else
         {
             return (-1, "none");
