@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         {
             for(int j = 0; j < 2; j++)
             {
-                cards[i] = players[i].cards[j];
+                cards[i * 2 + j] = players[i].cards[j];
             }
         }
 

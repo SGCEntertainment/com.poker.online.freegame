@@ -134,9 +134,13 @@ public static class Combination
         }
     }
 
-    public static Card GetHighCard(Card[] cards)
+    public static Card GetHighCard(Card[] userCards)
     {
-        var intGroup = cards.GroupBy(card => card.CardIntValue());
-        return cards[intGroup.Max().Key];
+        var intGroup = userCards.Select((card) => card.CardIntValue());
+
+        int max = intGroup.Where(i => i == intGroup.Max()).First();
+        int maxIndex = intGroup.ToList().FindIndex(i => i == max);
+
+        return userCards[maxIndex];
     }
 }
