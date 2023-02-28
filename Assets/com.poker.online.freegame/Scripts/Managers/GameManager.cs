@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
         }
 
         enable = false;
-        Debug.Log($"Royal Flush: {Combination.IsRoyalFlush(cards)}");
+        (int rating, string name) = Combination.GetCombination(cards);
+        Combination.IsStraight(cards);
+        //Debug.Log($"{name}({rating})");
     }
 }
