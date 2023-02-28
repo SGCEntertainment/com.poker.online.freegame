@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 public static class CardExtension
@@ -26,6 +27,11 @@ public static class CardExtension
     public static Card GetMinCard(this Card[] cards, Card _card)
     {
         return cards.Where(c => c.CardValue != _card.CardValue).First();
+    }
+
+    public static Card GetRandomCard(this List<Card> cards)
+    {
+        return cards[UnityEngine.Random.Range(0, cards.Count)];
     }
 
     public static int CardIntValue(this Card card) => card.CardValue switch

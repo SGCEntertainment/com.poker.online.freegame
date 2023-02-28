@@ -5,9 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool enable;
+    [SerializeField] Deck deck;
 
     [SerializeField] Table table;
     [SerializeField] Player[] players;
+
+    [Space(10)]
+    [SerializeField] List<Card> cardsForGame;
 
     private void OnValidate()
     {
@@ -17,15 +21,38 @@ public class GameManager : MonoBehaviour
         }
 
         enable = false;
-        Debug.Log($"Winner: {GetWinner().name}");
+        cardsForGame = deck.Cards;
+        //Debug.Log($"Winner: {GetWinner().name}");
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            foreach(Player player in players)
+            {
+                player.Cards = new Card[]
+                {
+                    GetCardFromDeck(), GetCardFromDeck()
+                };
+
+            }
+        }
+    }
+
+    private Card GetCardFromDeck()
+    {
+        Card card = cardsForGame.GetRandomCard();
+        cardsForGame.Remove(card);
+        return card;
     }
 
     private Player GetWinner()
     {
-        var t = players.GroupBy(player => new List<Card>()
+        var tableAndPlayerCards = players.GroupBy(player => new List<Card>()
         {
-            player.cards[0],
-            player.cards[1],
+            player.Cards[0],
+            player.Cards[1],
 
             table.cards[0],
             table.cards[1],
@@ -34,35 +61,27 @@ public class GameManager : MonoBehaviour
             table.cards[4],
         });
 
-        foreach(var i in t)
+        Dictionary<Player, (int, string)> result = new Dictionary<Player, (int, string)>();
+        tableAndPlayerCards.ToList().ForEach((data) =>
         {
-            foreach (Card card in i.Key)
-            {
-                Debug.Log($"{i.Single(p => p).name}.{card.CardValue} {card.CardSuit}");
-            }
-        }
+            result.Add(data.Single(), Combination.GetCombination(data.Key.ToArray()));
+        });
 
+        var winRating = result.Max(res => res.Value.Item1);
+        var winCombination = result.Select(res => res.Value).Where(v => v.Item1 == winRating).First();
+        Debug.Log(winCombination);
+        var winners = result.Where(res => res.Value == winCombination).Select(p => p.Key);
 
-
-
-        Card[] cards = new Card[players.Length * 2];
-        for(int i = 0; i < players.Length; i++)
+        List<Card> winnerCards = new List<Card>();
+        winners.ToList().ForEach((data) =>
         {
-            for(int j = 0; j < 2; j++)
-            {
-                cards[i * 2 + j] = players[i].cards[j];
-            }
-        }
+            winnerCards.AddRange(data.Cards);
+        });
 
-        Card HighCard = Combination.GetHighCard(cards);
-        var winners = players.Where(player => player.cards.IsContains(HighCard)).ToArray();
+        Card HighCard = Combination.GetHighCard(winnerCards.ToArray());
+        Card[] tmp = winners.Select(c => c.Cards.GetMinCard(HighCard)).ToArray();
+        HighCard = Combination.GetHighCard(tmp);
 
-        if(winners.Length > 1)
-        {
-            Card[] tmp = winners.Select(c => c.cards.GetMinCard(HighCard)).ToArray();
-            HighCard = Combination.GetHighCard(tmp);
-        }
-
-        return players.Where(player => player.cards.Contains(HighCard)).First();
+        return players.Where(player => player.Cards.Contains(HighCard)).First();
     }
 }
