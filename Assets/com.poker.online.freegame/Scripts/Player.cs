@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -28,5 +29,18 @@ public class Player : MonoBehaviour
         {
             _name = value;
         }
+    }
+
+    public string Combination
+    {
+        set
+        {
+            GetComponentInChildren<TextMeshPro>().text = value;
+        }
+    }
+
+    private void Start()
+    {
+        Combination = string.Empty;
     }
 }

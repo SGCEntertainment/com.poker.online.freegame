@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
 
         foreach(var res in result)
         {
+            res.Key.Combination = res.Value.Item2;
             Debug.Log($"<color=red>{res.Key.Name}</color> has a combination <color=red>{res.Value.Item2}</color>");
         }
 
@@ -115,7 +116,7 @@ public class GameManager : MonoBehaviour
             //HighCard = Combination.GetHighCard(tmp);
 
             Player winner = players.Where(player => player.Cards.Contains(HighCard)).First();
-            Debug.Log($"{winner.Name} <color=red>high card</color>{HighCard.CardValue}{HighCard.GetCardStringSuit()}");
+            Debug.Log($"{winner.Name} <color=red>high card </color>{HighCard.CardValue} {HighCard.GetCardStringSuit()}");
             return winner;
         }
 
