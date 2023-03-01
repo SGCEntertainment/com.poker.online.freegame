@@ -78,11 +78,6 @@ public static class Combination
 
         foreach (var i in duplicateGroup.Where(i => i.Value == 2))
         {
-            if(i.Value < 2)
-            {
-                continue;
-            }
-
             var findCards = cards.Where(card => card.CardIntValue() == i.Key);
             foreach(var findCard in findCards)
             {
