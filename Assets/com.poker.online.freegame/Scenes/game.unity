@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &159923054
 Transform:
   m_ObjectHideFlags: 0
@@ -2515,7 +2515,7 @@ Transform:
   m_GameObject: {fileID: 1061251232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.89, y: 0.89, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1000684658}
   - {fileID: 2038941624}
@@ -3015,7 +3015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1311951168
 Transform:
   m_ObjectHideFlags: 0
@@ -4012,9 +4012,7 @@ MonoBehaviour:
   table: {fileID: 2038941625}
   players:
   - {fileID: 1947796533}
-  - {fileID: 159923055}
   - {fileID: 101314524}
-  - {fileID: 1311951169}
   cardsForGame:
   - {fileID: 6326495683693678543, guid: 1c835666a9f215543ae362ee9318bfa6, type: 3}
   - {fileID: 3354888101454590770, guid: 737b5fe9808b4954e9d8a325e5e48e99, type: 3}

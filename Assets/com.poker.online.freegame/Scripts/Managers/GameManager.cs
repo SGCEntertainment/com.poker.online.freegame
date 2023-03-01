@@ -60,6 +60,18 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"Winner: {GetWinner().Profile.name}");
         }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            foreach(Card c in FindObjectsOfType<Card>())
+            {
+                Destroy(c.gameObject);
+            }
+
+            cardsForGame = deck.Cards;
+            StartCoroutine(nameof(DealCards));
+            StartCoroutine(DealTableCards(5));
+        }
     }
 
     private Card GetCardFromDeck()
@@ -112,7 +124,7 @@ public class GameManager : MonoBehaviour
             var t = winnerCards.GroupBy(wc => wc.CardValue).ToDictionary(y => y.Key, y => y.Count());
             foreach(var i in t)
             {
-                Debug.Log($"{i.Key} {i.Value}");
+                //Debug.Log($"{i.Key} {i.Value}");
             }
 
             Card HighCard = Combination.GetHighCard(winnerCards.ToArray());
