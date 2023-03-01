@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,14 @@ public static class CardExtension
         findCard = cards.FirstOrDefault(card => card.CardValue == cardValue);
         return cards.Any(card => card.CardValue == cardValue);
     }
+
+    public static string GetCardStringSuit(this Card card) => card.CardSuit switch
+    {
+        CardSuit.B => "♦",
+        CardSuit.P => "♠",
+        CardSuit.T => "♣",
+        CardSuit.C => "♥"
+    };
 
     public static bool IsContains(this Card[] cards, Card _card)
     {
