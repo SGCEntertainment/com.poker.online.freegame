@@ -20,14 +20,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private string _name;
-    public string Name
+    private Profile profile;
+    public Profile Profile
     {
-        get => _name;
+        get => profile;
 
         set
         {
-            _name = value;
+            SpriteRenderer icon = transform.GetChild(2).GetChild(0).GetComponent<SpriteRenderer>();
+            TextMeshPro nameText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshPro>();
+
+            icon.sprite = value.icon;
+            nameText.text = value.name;
         }
     }
 

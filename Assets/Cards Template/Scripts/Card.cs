@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private const float speed = 20.0f;
+    private const float speed = 30.0f;
 
     public CardValue CardValue;
     public CardSuit CardSuit;

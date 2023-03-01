@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].Name = names[i];
+            //players[i].Name = names[i];
         }
     }
 
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log($"Winner: {GetWinner().Name}");
+            Debug.Log($"Winner: {GetWinner().Profile.name}");
         }
     }
 
@@ -94,12 +94,12 @@ public class GameManager : MonoBehaviour
         foreach(var res in result)
         {
             res.Key.Combination = res.Value.Item2;
-            Debug.Log($"<color=red>{res.Key.Name}</color> has a combination <color=red>{res.Value.Item2}</color>");
+            //Debug.Log($"<color=red>{res.Key.Name}</color> has a combination <color=red>{res.Value.Item2}</color>");
         }
 
         var winRating = result.Max(res => res.Value.Item1);
         var winCombination = result.Select(res => res.Value).Where(v => v.Item1 == winRating).First();
-        Debug.Log($"Winning combination among players: <color=red>{winCombination.Item2}</color>");
+        //Debug.Log($"Winning combination among players: <color=red>{winCombination.Item2}</color>");
 
         var winners = result.Where(res => res.Value == winCombination).Select(p => p.Key);
 
@@ -111,12 +111,18 @@ public class GameManager : MonoBehaviour
                 winnerCards.AddRange(data.Cards);
             });
 
+            var t = winnerCards.GroupBy(wc => wc.CardValue).ToDictionary(y => y.Key, y => y.Count());
+            foreach(var i in t)
+            {
+                Debug.Log($"{i.Key} {i.Value}");
+            }
+
             Card HighCard = Combination.GetHighCard(winnerCards.ToArray());
             //Card[] tmp = winners.Select(c => c.Cards.GetMinCard(HighCard)).ToArray();
             //HighCard = Combination.GetHighCard(tmp);
 
             Player winner = players.Where(player => player.Cards.Contains(HighCard)).First();
-            Debug.Log($"{winner.Name} <color=red>high card </color>{HighCard.CardValue} {HighCard.GetCardStringSuit()}");
+            //Debug.Log($"{winner.Name} <color=red>high card </color>{HighCard.CardValue} {HighCard.GetCardStringSuit()}");
             return winner;
         }
 
