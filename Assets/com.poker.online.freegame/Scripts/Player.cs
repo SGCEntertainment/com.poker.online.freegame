@@ -1,8 +1,10 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private bool IsMyStep;
     [SerializeField] bool IsBot;
 
     private Card[] cards;
@@ -63,5 +65,25 @@ public class Player : MonoBehaviour
         }
 
         Combination = string.Empty;
+    }
+
+    public void Deal()
+    {
+        IsMyStep = true;
+    }
+
+    public IEnumerator WaitPlayerTurn()
+    {
+        if(!IsBot)
+        {
+            yield return new WaitUntil(() => IsMyStep);
+            Debug.Log($"{gameObject.name} turned");
+            IsMyStep = false;
+            yield break;
+        }
+
+        float time = Random.Range(1, 3);
+        yield return new WaitForSeconds(time);
+        Debug.Log($"{gameObject.name} turned");
     }
 }

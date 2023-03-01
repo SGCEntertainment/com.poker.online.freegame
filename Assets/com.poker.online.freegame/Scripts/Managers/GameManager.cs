@@ -42,36 +42,51 @@ public class GameManager : MonoBehaviour
         }
 
         cardsForGame = deck.Cards;
+
+        StartCoroutine(nameof(GameCycle));
+    }
+
+    private IEnumerator GameCycle()
+    {
+        while(true)
+        {
+            foreach(Player p in players)
+            {
+                yield return p.WaitPlayerTurn();
+            }
+
+            yield return null;
+        }
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(nameof(DealCards));
-        }
+        //if(Input.GetKeyDown(KeyCode.R))
+        //{
+        //    StartCoroutine(nameof(DealCards));
+        //}
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(DealTableCards(5));
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    StartCoroutine(DealTableCards(5));
+        //}
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Debug.Log($"Winner: {GetWinner().Profile.name}");
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    Debug.Log($"Winner: {GetWinner().Profile.name}");
+        //}
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            foreach(Card c in FindObjectsOfType<Card>())
-            {
-                Destroy(c.gameObject);
-            }
+        //if(Input.GetKeyDown(KeyCode.O))
+        //{
+        //    foreach(Card c in FindObjectsOfType<Card>())
+        //    {
+        //        Destroy(c.gameObject);
+        //    }
 
-            cardsForGame = deck.Cards;
-            StartCoroutine(nameof(DealCards));
-            StartCoroutine(DealTableCards(5));
-        }
+        //    cardsForGame = deck.Cards;
+        //    StartCoroutine(nameof(DealCards));
+        //    StartCoroutine(DealTableCards(5));
+        //}
     }
 
     private Card GetCardFromDeck()
