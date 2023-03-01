@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     {
         if(!IsBot)
         {
+            IsMyStep = false;
             profile = new Profile
             {
                 name = "You"
@@ -78,12 +79,14 @@ public class Player : MonoBehaviour
         {
             yield return new WaitUntil(() => IsMyStep);
             Debug.Log($"{gameObject.name} turned");
+            GameManager.Instance.AddToPot(100);
             IsMyStep = false;
             yield break;
         }
 
         float time = Random.Range(1, 3);
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.AddToPot(100);
         Debug.Log($"{gameObject.name} turned");
     }
 }

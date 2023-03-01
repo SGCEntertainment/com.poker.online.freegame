@@ -1,48 +1,57 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
+
 using System.Linq;
 using UnityEngine;
 
+using TMPro;
+
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] bool enable;
+    public static GameManager Instance
+    {
+        get => FindObjectOfType<GameManager>();
+    }
 
     [SerializeField] Deck deck;
     [SerializeField] UserDatabase userDatabase;
 
-    [SerializeField] Table table;
+    private Table Table { get; set; }
+    private Player[] Players { get; set; }
+    private List<Card> CardsForGame { get; set; }
 
-    [Space(10)]
-    [SerializeField] Player[] players;
-
-    public List<Card> cardsForGame;
-
-    private void OnValidate()
-    {
-        if(!enable)
-        {
-            return;
-        }
-
-        enable = false;
-        cardsForGame = deck.Cards;
-        //Debug.Log($"Winner: {GetWinner().name}");
-    }
+    private int potCount;
+    [SerializeField] TextMeshPro potText;
 
     private void Start()
     {
+        StartGame();
+    }
+
+    public void StartGame()
+    {
+        ////////////////////
+        /////////////////////
+        ///////////////////
+        Table = FindObjectOfType<Table>();
+        /////////////////
+        //////////////////
+        //////////////
+        Players = FindObjectsOfType<Player>();
+        /////////////////
+        //////////находит игроков в разных последовтеьномтях, не находит меня первым
+
         List<Profile> profiles = userDatabase.Profiles;
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < Players.Length; i++)
         {
             Profile profile = profiles[Random.Range(0, profiles.Count)];
-            players[i].Profile = profile;
+            Players[i].Profile = profile;
 
             profiles.Remove(profile);
         }
 
-        cardsForGame = deck.Cards;
-
+        CardsForGame = deck.Cards;
         StartCoroutine(nameof(GameCycle));
     }
 
@@ -50,13 +59,19 @@ public class GameManager : MonoBehaviour
     {
         while(true)
         {
-            foreach(Player p in players)
+            foreach(Player p in Players)
             {
                 yield return p.WaitPlayerTurn();
             }
 
             yield return null;
         }
+    }
+
+    public void AddToPot(int amount)
+    {
+        potCount += amount;
+        potText.text = $"{potCount:N}";
     }
 
     private void Update()
@@ -91,23 +106,23 @@ public class GameManager : MonoBehaviour
 
     private Card GetCardFromDeck()
     {
-        Card card = cardsForGame.GetRandomCard();
-        cardsForGame.Remove(card);
+        Card card = CardsForGame.GetRandomCard();
+        CardsForGame.Remove(card);
         return card;
     }
 
     private Player GetWinner()
     {
-        var tableAndPlayerCards = players.GroupBy(player => new List<Card>()
+        var tableAndPlayerCards = Players.GroupBy(player => new List<Card>()
         {
             player.Cards[0],
             player.Cards[1],
 
-            table.Cards[0],
-            table.Cards[1],
-            table.Cards[2],
-            table.Cards[3],
-            table.Cards[4],
+            Table.Cards[0],
+            Table.Cards[1],
+            Table.Cards[2],
+            Table.Cards[3],
+            Table.Cards[4],
         });
 
         Dictionary<Player, (int, string)> result = new Dictionary<Player, (int, string)>();
@@ -146,7 +161,7 @@ public class GameManager : MonoBehaviour
             //Card[] tmp = winners.Select(c => c.Cards.GetMinCard(HighCard)).ToArray();
             //HighCard = Combination.GetHighCard(tmp);
 
-            Player winner = players.Where(player => player.Cards.Contains(HighCard)).First();
+            Player winner = Players.Where(player => player.Cards.Contains(HighCard)).First();
             //Debug.Log($"{winner.Name} <color=red>high card </color>{HighCard.CardValue} {HighCard.GetCardStringSuit()}");
             return winner;
         }
@@ -156,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator DealCards()
     {
-        foreach (Player player in players)
+        foreach (Player player in Players)
         {
             player.Cards = new Card[]
             {
@@ -175,7 +190,7 @@ public class GameManager : MonoBehaviour
             cards[i] = GetCardFromDeck();
         }
 
-        table.Cards = cards.ToList();
+        Table.Cards = cards.ToList();
         yield return null;
     }
 }
