@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] bool IsBot;
+
     private Card[] cards;
     public Card[] Cards
     {
@@ -27,11 +29,18 @@ public class Player : MonoBehaviour
 
         set
         {
+            if(!IsBot)
+            {
+                return;
+            }
+
             SpriteRenderer icon = transform.GetChild(2).GetChild(0).GetComponent<SpriteRenderer>();
-            TextMeshPro nameText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshPro>();
+            TextMeshPro nameText = transform.GetChild(2).GetChild(1).GetComponent<TextMeshPro>();
 
             icon.sprite = value.icon;
             nameText.text = value.name;
+
+            profile = value;
         }
     }
 

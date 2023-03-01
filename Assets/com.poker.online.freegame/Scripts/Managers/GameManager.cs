@@ -6,7 +6,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool enable;
+
     [SerializeField] Deck deck;
+    [SerializeField] UserDatabase userDatabase;
 
     [SerializeField] Table table;
 
@@ -14,8 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player[] players;
 
     public List<Card> cardsForGame;
-
-    [SerializeField] List<string> names;
 
     private void OnValidate()
     {
@@ -31,19 +31,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < names.Count; i++)
-        {
-            string tmp = names[i];
-            int rv = Random.Range(i, names.Count);
-
-            names[i] = names[rv];
-            names[rv] = tmp;
-        }
+        List<Profile> profiles = userDatabase.Profiles;
 
         for (int i = 0; i < players.Length; i++)
         {
-            //players[i].Name = names[i];
+            Profile profile = profiles[Random.Range(0, profiles.Count)];
+            players[i].Profile = profile;
+
+            profiles.Remove(profile);
         }
+
+        cardsForGame = deck.Cards;
     }
 
     private void Update()
@@ -138,7 +136,7 @@ public class GameManager : MonoBehaviour
                 GetCardFromDeck(), GetCardFromDeck()
             };
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

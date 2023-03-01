@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3193744695384235013}
   - component: {fileID: 9002937931976835546}
+  - component: {fileID: 3509796194971525039}
   - component: {fileID: 4979870739111028959}
   m_Layer: 0
   m_Name: DP
@@ -83,6 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &3509796194971525039
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2317492450752447207}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &4979870739111028959
 MonoBehaviour:
   m_ObjectHideFlags: 0

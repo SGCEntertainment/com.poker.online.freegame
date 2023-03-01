@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5008222266511291532}
   - component: {fileID: 4232015375997560176}
+  - component: {fileID: 4742844661877964821}
   - component: {fileID: 3579491477712524581}
   m_Layer: 0
   m_Name: 6C
@@ -83,6 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &4742844661877964821
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715380499132590537}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &3579491477712524581
 MonoBehaviour:
   m_ObjectHideFlags: 0

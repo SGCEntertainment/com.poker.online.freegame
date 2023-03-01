@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7548685664178687453}
   - component: {fileID: 3930885030057400517}
+  - component: {fileID: -6153126356584361470}
   - component: {fileID: 6326495683693678543}
   m_Layer: 0
   m_Name: DC
@@ -83,6 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &-6153126356584361470
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706600157423431520}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &6326495683693678543
 MonoBehaviour:
   m_ObjectHideFlags: 0

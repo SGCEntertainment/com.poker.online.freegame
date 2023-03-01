@@ -356,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b769bed04ac74a9fb55966dcc2d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBot: 1
 --- !u!1 &130101494
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ RectTransform:
   m_LocalScale: {x: 1.1740948, y: 1.1740948, z: 1.1740948}
   m_Children: []
   m_Father: {fileID: 1572187391}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -573,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b769bed04ac74a9fb55966dcc2d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBot: 1
 --- !u!1 &196597579
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +634,7 @@ Transform:
   m_LocalScale: {x: 1.0989519, y: 1.0989519, z: 1.0989519}
   m_Children: []
   m_Father: {fileID: 446895465}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &230905962
 SpriteRenderer:
@@ -1158,7 +1160,7 @@ Transform:
   m_LocalScale: {x: 1.0989519, y: 1.0989519, z: 1.0989519}
   m_Children: []
   m_Father: {fileID: 1572187391}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &421029295
 SpriteRenderer:
@@ -1239,8 +1241,8 @@ Transform:
   m_LocalScale: {x: 0.85172004, y: 0.85172004, z: 0.85172004}
   m_Children:
   - {fileID: 1926504503}
-  - {fileID: 230905961}
   - {fileID: 1451930955}
+  - {fileID: 230905961}
   m_Father: {fileID: 101314523}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1274,7 +1276,7 @@ RectTransform:
   m_LocalScale: {x: 1.1740948, y: 1.1740948, z: 1.1740948}
   m_Children: []
   m_Father: {fileID: 631907749}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1533,8 +1535,8 @@ Transform:
   m_LocalScale: {x: 0.85172, y: 0.85172, z: 0.85172}
   m_Children:
   - {fileID: 931081441}
-  - {fileID: 1838500385}
   - {fileID: 469432358}
+  - {fileID: 1838500385}
   m_Father: {fileID: 1311951168}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2118,7 +2120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000684657}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.678, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1061251233}
@@ -2789,6 +2791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b769bed04ac74a9fb55966dcc2d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBot: 1
 --- !u!1 &1320501309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,7 +3135,7 @@ RectTransform:
   m_LocalScale: {x: 1.1740948, y: 1.1740948, z: 1.1740948}
   m_Children: []
   m_Father: {fileID: 446895465}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3331,8 +3334,8 @@ Transform:
   m_LocalScale: {x: 0.85172, y: 0.85172, z: 0.85172}
   m_Children:
   - {fileID: 330353492}
-  - {fileID: 421029294}
   - {fileID: 130101495}
+  - {fileID: 421029294}
   m_Father: {fileID: 159923054}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3620,7 +3623,7 @@ Transform:
   m_LocalScale: {x: 1.0989519, y: 1.0989519, z: 1.0989519}
   m_Children: []
   m_Father: {fileID: 631907749}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1838500386
 SpriteRenderer:
@@ -3718,6 +3721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enable: 0
   deck: {fileID: 11400000, guid: d6e37e32d160eea43a746a58c4432c5e, type: 2}
+  userDatabase: {fileID: 11400000, guid: 006d6d0d406818f40851fbe194fc33a5, type: 2}
   table: {fileID: 2038941625}
   players:
   - {fileID: 1947796533}
@@ -3761,16 +3765,6 @@ MonoBehaviour:
   - {fileID: 5417635795692873120, guid: bf04331b7335edf4b858df03526da171, type: 3}
   - {fileID: 3599124464456731728, guid: 487a1fec258b0c34599efbf1157a36ed, type: 3}
   - {fileID: 4354413621837596508, guid: 1583879031016dc40b19cc9a04b76677, type: 3}
-  names:
-  - Liam
-  - Noah
-  - Oliver
-  - Elijah
-  - James
-  - William
-  - Benjamin
-  - Henry
-  - Theodore
 --- !u!1 &1926504502
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,6 +3892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b769bed04ac74a9fb55966dcc2d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBot: 0
 --- !u!1 &2038941623
 GameObject:
   m_ObjectHideFlags: 0

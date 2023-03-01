@@ -7,20 +7,21 @@ public class UserDatabase : ScriptableObject
 {
     [SerializeField] Profile[] userProfiles;
 
-    public List<Profile> Cards
+    public List<Profile> Profiles
     {
         get
         {
-            for (int i = 0; i < userProfiles.Length; i++)
+            Profile[] copy = userProfiles;
+            for (int i = 0; i < copy.Length; i++)
             {
-                Profile tmp = userProfiles[i];
-                int rv = Random.Range(i, userProfiles.Length);
+                Profile tmp = copy[i];
+                int rv = Random.Range(i, copy.Length);
 
-                userProfiles[i] = userProfiles[rv];
-                userProfiles[rv] = tmp;
+                copy[i] = copy[rv];
+                copy[rv] = tmp;
             }
 
-            return userProfiles.ToList();
+            return copy.ToList();
         }
     }
 }

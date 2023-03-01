@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2094645346138699787}
   - component: {fileID: 7173417062465335426}
+  - component: {fileID: -4364135857004428702}
   - component: {fileID: 5305222810990070993}
   m_Layer: 0
   m_Name: AC
@@ -83,6 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &-4364135857004428702
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245868230416761735}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &5305222810990070993
 MonoBehaviour:
   m_ObjectHideFlags: 0

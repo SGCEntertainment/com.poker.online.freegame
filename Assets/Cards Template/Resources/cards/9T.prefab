@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3377297835610376858}
   - component: {fileID: 1318353960820247478}
+  - component: {fileID: 6649426838428431147}
   - component: {fileID: 1800521647003595066}
   m_Layer: 0
   m_Name: 9T
@@ -83,6 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &6649426838428431147
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826067607738561116}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &1800521647003595066
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703329016691850521}
   - component: {fileID: 7339096740928604681}
+  - component: {fileID: 1048028920549918904}
   - component: {fileID: 859101892217725007}
   m_Layer: 0
   m_Name: KC
@@ -83,6 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &1048028920549918904
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001261547646135862}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f45bef6e084190f4086357ab957ea8ff, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &859101892217725007
 MonoBehaviour:
   m_ObjectHideFlags: 0
