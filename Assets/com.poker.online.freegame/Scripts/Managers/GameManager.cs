@@ -34,6 +34,16 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(nameof(DealCards));
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(DealTableCards(5));
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log($"Winner: {GetWinner().name}");
+        }
     }
 
     private Card GetCardFromDeck()
@@ -50,11 +60,11 @@ public class GameManager : MonoBehaviour
             player.Cards[0],
             player.Cards[1],
 
-            table.cards[0],
-            table.cards[1],
-            table.cards[2],
-            table.cards[3],
-            table.cards[4],
+            table.Cards[0],
+            table.Cards[1],
+            table.Cards[2],
+            table.Cards[3],
+            table.Cards[4],
         });
 
         Dictionary<Player, (int, string)> result = new Dictionary<Player, (int, string)>();
@@ -68,17 +78,22 @@ public class GameManager : MonoBehaviour
         Debug.Log(winCombination);
         var winners = result.Where(res => res.Value == winCombination).Select(p => p.Key);
 
-        List<Card> winnerCards = new List<Card>();
-        winners.ToList().ForEach((data) =>
+        if (winners.Count() > 1)
         {
-            winnerCards.AddRange(data.Cards);
-        });
+            List<Card> winnerCards = new List<Card>();
+            winners.ToList().ForEach((data) =>
+            {
+                winnerCards.AddRange(data.Cards);
+            });
 
-        Card HighCard = Combination.GetHighCard(winnerCards.ToArray());
-        Card[] tmp = winners.Select(c => c.Cards.GetMinCard(HighCard)).ToArray();
-        HighCard = Combination.GetHighCard(tmp);
+            Card HighCard = Combination.GetHighCard(winnerCards.ToArray());
+            Card[] tmp = winners.Select(c => c.Cards.GetMinCard(HighCard)).ToArray();
+            HighCard = Combination.GetHighCard(tmp);
 
-        return players.Where(player => player.Cards.Contains(HighCard)).First();
+            return players.Where(player => player.Cards.Contains(HighCard)).First();
+        }
+
+        return winners.Single();
     }
 
     private IEnumerator DealCards()
@@ -90,7 +105,19 @@ public class GameManager : MonoBehaviour
                 GetCardFromDeck(), GetCardFromDeck()
             };
 
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    private IEnumerator DealTableCards(int count)
+    {
+        Card[] cards = new Card[count];
+        for(int i = 0; i < cards.Length; i++)
+        {
+            cards[i] = GetCardFromDeck();
+        }
+
+        table.Cards = cards.ToList();
+        yield return null;
     }
 }
