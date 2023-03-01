@@ -9,9 +9,10 @@ public class Player : MonoBehaviour
 
         set
         {
-            foreach(Card card in value)
+
+            for(int i = 0; i < value.Length; i++)
             {
-                Instantiate(card.gameObject, transform);
+                Instantiate(value[i].gameObject, transform.GetChild(0).GetChild(i));
             }
 
             cards = value;

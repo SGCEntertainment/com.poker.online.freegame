@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private Vector2 Target;
-    private const float speed = 25.0f;
+    private const float speed = 15.0f;
 
     public CardValue CardValue;
     public CardSuit CardSuit;
 
     private void Start()
     {
-        Target = transform.parent.localPosition;
+        transform.position = GameObject.Find("deck").transform.position;
+        transform.up = transform.parent.up;
     }
 
     private void Update()
     {
-        transform.localPosition = Vector2.MoveTowards(transform.localPosition, transform.parent.localPosition, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, speed * Time.deltaTime);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Deck deck;
 
     [SerializeField] Table table;
+
+    [Space(10)]
     [SerializeField] Player[] players;
 
     [Space(10)]
@@ -29,14 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            foreach(Player player in players)
-            {
-                player.Cards = new Card[]
-                {
-                    GetCardFromDeck(), GetCardFromDeck()
-                };
-
-            }
+            StartCoroutine(nameof(DealCards));
         }
     }
 
@@ -83,5 +79,18 @@ public class GameManager : MonoBehaviour
         HighCard = Combination.GetHighCard(tmp);
 
         return players.Where(player => player.Cards.Contains(HighCard)).First();
+    }
+
+    private IEnumerator DealCards()
+    {
+        foreach (Player player in players)
+        {
+            player.Cards = new Card[]
+            {
+                GetCardFromDeck(), GetCardFromDeck()
+            };
+
+            yield return new WaitForSeconds(0.15f);
+        }
     }
 }
