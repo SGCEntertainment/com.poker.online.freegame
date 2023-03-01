@@ -76,7 +76,7 @@ public static class Combination
         var duplicateGroup = intGroup.GroupBy(i => i).ToDictionary(y => y.Key, y => y.Count());
         int pairCount = duplicateGroup.Where(i => i.Value == 2).Count();
 
-        return pairCount == 2 ? 3 : -1;
+        return pairCount >= 2 ? 3 : -1;
     }
 
     public static int IsPair()

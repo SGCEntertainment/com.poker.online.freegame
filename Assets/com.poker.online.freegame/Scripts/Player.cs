@@ -54,6 +54,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        if(!IsBot)
+        {
+            profile = new Profile
+            {
+                name = "You"
+            };
+        }
+
         Combination = string.Empty;
     }
 }
