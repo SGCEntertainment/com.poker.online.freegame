@@ -3,6 +3,8 @@ using TMPro;
 
 public class Room : MonoBehaviour
 {
+    public int streetId;
+
     public static bool IsReady { get; set; }
     private static float smoothTime = 0.1f;
     private Vector2 velocity = Vector2.zero;

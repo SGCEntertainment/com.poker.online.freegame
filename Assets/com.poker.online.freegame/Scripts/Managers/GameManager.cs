@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
         get => FindObjectOfType<GameManager>();
     }
 
+    private int[] streetCardCounts = { 0, 3, 1, 1};
+
     [SerializeField] Deck deck;
     [SerializeField] UserDatabase userDatabase;
 
@@ -63,45 +65,9 @@ public class GameManager : MonoBehaviour
         Player.IsMyStep = true;
     }
 
-    private IEnumerator GameCycle()
-    {
-        while(true)
-        {
-            foreach(Player p in Room.players)
-            {
-                yield return p.WaitPlayerTurn();
-            }
-
-            yield return null;
-        }
-    }
-
     public void AddToPot(int amount)
     {
         Room.AddToPot(amount);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(nameof(DealCards));
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(DealTableCards(5));
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            //foreach(Player player in Room.players)
-            //{
-            //    player.HideCards(false);
-            //}
-
-            Debug.Log($"Winner: {GetWinner().Profile.name}");
-        }
     }
 
     private Card GetCardFromDeck()
@@ -169,6 +135,35 @@ public class GameManager : MonoBehaviour
         return winners.Single();
     }
 
+    private IEnumerator GameCycle()
+    {
+        yield return new WaitUntil(() => Room.IsReady);
+        yield return StartCoroutine(nameof(DealCards));
+
+        while (true)
+        {
+            yield return StartCoroutine(nameof(DealTableCards));
+            if (Room.streetId >= streetCardCounts.Length)
+            {
+                foreach(Player p in Room.players)
+                {
+                    p.HideCards(false);
+                    yield return new WaitForSeconds(0.25f);
+                }
+
+                Debug.Log($"Winner: {GetWinner().Profile.name}");
+                yield break;
+            }
+
+            foreach (Player p in Room.players)
+            {
+                yield return p.WaitPlayerTurn();
+            }
+
+            yield return null;
+        }
+    }
+
     private IEnumerator DealCards()
     {
         foreach (Player player in Room.players)
@@ -182,15 +177,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator DealTableCards(int count)
+    private IEnumerator DealTableCards()
     {
-        Card[] cards = new Card[count];
+        int cardCount = streetCardCounts[Room.streetId];
+        Card[] cards = new Card[cardCount];
         for(int i = 0; i < cards.Length; i++)
         {
             cards[i] = GetCardFromDeck();
         }
 
+        Room.streetId++;
         Room.table.Cards = cards.ToList();
+
         yield return null;
     }
 }

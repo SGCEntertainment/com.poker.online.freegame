@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
         if(!IsBot)
         {
             yield return new WaitUntil(() => IsMyStep);
-            Debug.Log($"{gameObject.name} turned");
             GameManager.Instance.AddToPot(100);
             IsMyStep = false;
             yield break;
@@ -95,9 +94,8 @@ public class Player : MonoBehaviour
 
         float time = Random.Range(3, 5);
         Handler.SetActive(true);
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(0.5f);
         Handler.SetActive(false);
         GameManager.Instance.AddToPot(100);
-        Debug.Log($"{gameObject.name} turned");
     }
 }
