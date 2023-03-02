@@ -27,6 +27,6 @@ public class Card : MonoBehaviour
         }
 
         transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, speed * Time.deltaTime);
-        IsDestinated = Vector2.Distance(transform.position, transform.parent.position) < 0.1f;
+        IsDestinated = transform.position == transform.parent.position;
     }
 }

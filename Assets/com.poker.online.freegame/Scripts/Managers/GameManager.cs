@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 Card[] cards = FindObjectsOfType<Card>();
-                GameObject center = GameObject.Find("center");
+                GameObject center = GameObject.Find("deck");
 
                 foreach (Card card in cards)
                 {
