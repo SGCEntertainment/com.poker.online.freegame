@@ -3,7 +3,18 @@ using System.Collections;
 
 public class MenuItem : MonoBehaviour
 {
-    private static float smoothTime = 0.15f;
+    public enum Type
+    {
+        [InspectorName("Вылетать слева")]
+        left,
+
+        [InspectorName("Вылетать справа")]
+        right,
+    }
+
+    [SerializeField] Type type;
+
+    private const float smoothTime = 0.08f;
     private Vector2 TargetPosition;
 
     private bool IsEnable { get; set; }
@@ -26,7 +37,7 @@ public class MenuItem : MonoBehaviour
         IsEnable = false;
         IsDestinated = false;
 
-        float xOffset = -2000;
+        float xOffset = type == Type.left ? -2000 : 2000;
         transform.localPosition += Vector3.right * xOffset;
 
         StartCoroutine(nameof(Delay));

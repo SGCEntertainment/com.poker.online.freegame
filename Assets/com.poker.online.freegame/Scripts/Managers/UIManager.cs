@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,13 +8,23 @@ public class UIManager : MonoBehaviour
     [Space(10)]
     [SerializeField] GameObject menu;
     [SerializeField] GameObject game;
+    [SerializeField] GameObject rules;
+
+    [Space(10)]
+    [SerializeField] Button dealBtn;
 
     private void Start()
     {
+        rules.SetActive(false);
         game.SetActive(false);
         menu.SetActive(true);
 
         background.SetActive(true);
+    }
+
+    private void Update()
+    {
+        dealBtn.interactable = Player.IsMyStep;
     }
 
     public void JoinRoom()
@@ -32,6 +43,11 @@ public class UIManager : MonoBehaviour
 
         menu.SetActive(true);
         game.SetActive(false);
+    }
+
+    public void OpenRules(bool IsOpen)
+    {
+        rules.SetActive(IsOpen);
     }
 
     public void ExitGame()
