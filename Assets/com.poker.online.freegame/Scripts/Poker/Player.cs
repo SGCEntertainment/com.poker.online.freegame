@@ -1,9 +1,12 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class Player : MonoBehaviour
 {
+    public static Action<Player> OnChipSet { get; set; }
+
     public static bool IsMyStep;
     [SerializeField] bool IsBot;
 
@@ -23,6 +26,11 @@ public class Player : MonoBehaviour
             cards = _cards;
             HideCards(IsBot);
         }
+    }
+
+    public Transform ChipHolder
+    {
+        get => transform.GetChild(3);
     }
 
     private Profile profile;
@@ -87,15 +95,15 @@ public class Player : MonoBehaviour
         if(!IsBot)
         {
             yield return new WaitWhile(() => IsMyStep);
-            GameManager.Instance.AddToPot(100);
+            OnChipSet?.Invoke(this);
             SFXManager.Instance.PlayEffect(3);
             yield break;
         }
 
         Handler.SetActive(true);
         yield return new WaitForSeconds(1.5f);
+        OnChipSet?.Invoke(this);
         SFXManager.Instance.PlayEffect(3);
         Handler.SetActive(false);
-        GameManager.Instance.AddToPot(100);
     }
 }

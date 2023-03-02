@@ -16,8 +16,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] Deck deck;
     [SerializeField] UserDatabase userDatabase;
 
+    private Chip[] ChipVariants { get; set; }
+    private List<Chip> PotChips { get; set; }
+
     private Room Room { get; set; }
     private List<Card> CardsForGame { get; set; }
+
+    private void Awake()
+    {
+        PotChips = new List<Chip>();
+        ChipVariants = Resources.LoadAll<Chip>("chips");
+
+        Player.OnChipSet += (player) =>
+        {
+            foreach(Chip chip in ChipVariants)
+            {
+                Chip _chip = Instantiate(chip, player.ChipHolder);
+                _chip.transform.position = player.transform.position;
+
+                float x = Random.Range(-1.0f, 1.0f);
+                float y = Random.Range(0.0f, 0.6f);
+
+                _chip.Target = new Vector2(x, y);
+                PotChips.Add(_chip);
+            }
+        };
+    }
 
     public void StartGame()
     {
@@ -56,11 +80,6 @@ public class GameManager : MonoBehaviour
         }
 
         Player.IsMyStep = false;
-    }
-
-    public void AddToPot(int amount)
-    {
-        Room.AddToPot(amount);
     }
 
     private Card GetCardFromDeck()
@@ -138,6 +157,8 @@ public class GameManager : MonoBehaviour
             yield return StartCoroutine(nameof(DealTableCards));
             if (Room.streetId >= streetCardCounts.Length)
             {
+                yield return new WaitForSeconds(0.85f);
+
                 foreach(Player p in Room.players)
                 {
                     p.HideCards(false);
@@ -146,11 +167,16 @@ public class GameManager : MonoBehaviour
 
                 Player winner = GetWinner();
                 Debug.Log($"winner: {winner.Profile.name}");
+                foreach(Chip chip in PotChips)
+                {
+                    chip.transform.SetParent(winner.ChipHolder);
+                    chip.Target = winner.ChipHolder.position;
+                }
 
                 int idClip = string.Equals(winner.Profile.name, "You") ? 1 : 0;
                 SFXManager.Instance.PlayEffect(idClip);
 
-                yield return new WaitForSeconds(2.0f);
+                yield return new WaitForSeconds(4.0f);
                 foreach (Player p in Room.players)
                 {
                     p.Combination = string.Empty;
@@ -179,9 +205,15 @@ public class GameManager : MonoBehaviour
                     Destroy(c.gameObject);
                 }
 
-                Room.ResetPot();
+                foreach (Chip chip in PotChips)
+                {
+                    Destroy(chip.gameObject);
+                }
+
                 CardsForGame = deck.Cards;
+
                 Room.table.Clear();
+                PotChips.Clear();
 
                 StopCoroutine(nameof(GameCycle));
                 StartCoroutine(nameof(GameCycle));
