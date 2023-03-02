@@ -7,6 +7,11 @@ public class Card : MonoBehaviour
     public CardValue CardValue;
     public CardSuit CardSuit;
 
+    public bool Hide
+    {
+        set => transform.GetChild(0).gameObject.SetActive(value);
+    }
+
     private void Start()
     {
         transform.position = GameObject.Find("deck").transform.position;

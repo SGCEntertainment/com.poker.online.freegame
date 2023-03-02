@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private bool IsMyStep;
+    public static bool IsMyStep;
     [SerializeField] bool IsBot;
 
     private Card[] cards;
@@ -14,13 +14,13 @@ public class Player : MonoBehaviour
 
         set
         {
-
             for(int i = 0; i < value.Length; i++)
             {
                 Instantiate(value[i].gameObject, transform.GetChild(0).GetChild(i));
             }
 
             cards = value;
+            HideCards(IsBot);
         }
     }
 
@@ -54,6 +54,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private GameObject Handler
+    {
+        get => transform.GetChild(2).GetChild(3).gameObject;
+    }
+
     private void Start()
     {
         if(!IsBot)
@@ -68,9 +73,12 @@ public class Player : MonoBehaviour
         Combination = string.Empty;
     }
 
-    public void Deal()
+    public void HideCards(bool IsHide)
     {
-        IsMyStep = true;
+        foreach (Card card in Cards)
+        {
+            card.Hide = IsHide;
+        }
     }
 
     public IEnumerator WaitPlayerTurn()
@@ -84,8 +92,10 @@ public class Player : MonoBehaviour
             yield break;
         }
 
-        float time = Random.Range(1, 3);
-        yield return new WaitForSeconds(1);
+        float time = Random.Range(3, 5);
+        Handler.SetActive(true);
+        yield return new WaitForSeconds(time);
+        Handler.SetActive(false);
         GameManager.Instance.AddToPot(100);
         Debug.Log($"{gameObject.name} turned");
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class Deck : ScriptableObject
 {
+    public Sprite shirt;
     [SerializeField] Card[] cards;
 
     public List<Card> Cards

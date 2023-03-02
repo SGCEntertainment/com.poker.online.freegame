@@ -4,8 +4,6 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-using TMPro;
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance
@@ -16,12 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Deck deck;
     [SerializeField] UserDatabase userDatabase;
 
-    private Table Table { get; set; }
-    private Player[] Players { get; set; }
+    private Room Room { get; set; }
     private List<Card> CardsForGame { get; set; }
 
-    private int potCount;
-    [SerializeField] TextMeshPro potText;
+    public Sprite Shirt
+    {
+        get => deck.shirt;
+    }
 
     private void Start()
     {
@@ -30,23 +29,15 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        ////////////////////
-        /////////////////////
-        ///////////////////
-        Table = FindObjectOfType<Table>();
-        /////////////////
-        //////////////////
-        //////////////
-        Players = FindObjectsOfType<Player>();
-        /////////////////
-        //////////находит игроков в разных последовтеьномтях, не находит меня первым
+        Transform parent = GameObject.Find("Environment").transform;
+        Room = Instantiate(Resources.Load<Room>("room"), parent);
 
         List<Profile> profiles = userDatabase.Profiles;
 
-        for (int i = 0; i < Players.Length; i++)
+        for (int i = 0; i < Room.players.Length; i++)
         {
             Profile profile = profiles[Random.Range(0, profiles.Count)];
-            Players[i].Profile = profile;
+            Room.players[i].Profile = profile;
 
             profiles.Remove(profile);
         }
@@ -55,11 +46,28 @@ public class GameManager : MonoBehaviour
         StartCoroutine(nameof(GameCycle));
     }
 
+    public void RestartGame()
+    {
+        StopAllCoroutines();
+
+        if(Room)
+        {
+            Destroy(Room.gameObject);
+        }
+
+        StartGame();
+    }
+
+    public void Deal()
+    {
+        Player.IsMyStep = true;
+    }
+
     private IEnumerator GameCycle()
     {
         while(true)
         {
-            foreach(Player p in Players)
+            foreach(Player p in Room.players)
             {
                 yield return p.WaitPlayerTurn();
             }
@@ -70,38 +78,30 @@ public class GameManager : MonoBehaviour
 
     public void AddToPot(int amount)
     {
-        potCount += amount;
-        potText.text = $"{potCount:N}";
+        Room.AddToPot(amount);
     }
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.R))
-        //{
-        //    StartCoroutine(nameof(DealCards));
-        //}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(nameof(DealCards));
+        }
 
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    StartCoroutine(DealTableCards(5));
-        //}
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(DealTableCards(5));
+        }
 
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    Debug.Log($"Winner: {GetWinner().Profile.name}");
-        //}
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            //foreach(Player player in Room.players)
+            //{
+            //    player.HideCards(false);
+            //}
 
-        //if(Input.GetKeyDown(KeyCode.O))
-        //{
-        //    foreach(Card c in FindObjectsOfType<Card>())
-        //    {
-        //        Destroy(c.gameObject);
-        //    }
-
-        //    cardsForGame = deck.Cards;
-        //    StartCoroutine(nameof(DealCards));
-        //    StartCoroutine(DealTableCards(5));
-        //}
+            Debug.Log($"Winner: {GetWinner().Profile.name}");
+        }
     }
 
     private Card GetCardFromDeck()
@@ -113,16 +113,16 @@ public class GameManager : MonoBehaviour
 
     private Player GetWinner()
     {
-        var tableAndPlayerCards = Players.GroupBy(player => new List<Card>()
+        var tableAndPlayerCards = Room.players.GroupBy(player => new List<Card>()
         {
             player.Cards[0],
             player.Cards[1],
 
-            Table.Cards[0],
-            Table.Cards[1],
-            Table.Cards[2],
-            Table.Cards[3],
-            Table.Cards[4],
+            Room.table.Cards[0],
+            Room.table.Cards[1],
+            Room.table.Cards[2],
+            Room.table.Cards[3],
+            Room.table.Cards[4],
         });
 
         Dictionary<Player, (int, string)> result = new Dictionary<Player, (int, string)>();
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
             //Card[] tmp = winners.Select(c => c.Cards.GetMinCard(HighCard)).ToArray();
             //HighCard = Combination.GetHighCard(tmp);
 
-            Player winner = Players.Where(player => player.Cards.Contains(HighCard)).First();
+            Player winner = Room.players.Where(player => player.Cards.Contains(HighCard)).First();
             //Debug.Log($"{winner.Name} <color=red>high card </color>{HighCard.CardValue} {HighCard.GetCardStringSuit()}");
             return winner;
         }
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator DealCards()
     {
-        foreach (Player player in Players)
+        foreach (Player player in Room.players)
         {
             player.Cards = new Card[]
             {
@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
             cards[i] = GetCardFromDeck();
         }
 
-        Table.Cards = cards.ToList();
+        Room.table.Cards = cards.ToList();
         yield return null;
     }
 }

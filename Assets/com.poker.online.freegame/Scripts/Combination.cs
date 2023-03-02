@@ -76,14 +76,14 @@ public static class Combination
         var duplicateGroup = intGroup.GroupBy(i => i).ToDictionary(y => y.Key, y => y.Count());
         int pairCount = duplicateGroup.Where(i => i.Value == 2).Count();
 
-        foreach (var i in duplicateGroup.Where(i => i.Value == 2))
-        {
-            var findCards = cards.Where(card => card.CardIntValue() == i.Key);
-            foreach(var findCard in findCards)
-            {
-                UnityEngine.Debug.Log($"{findCard.CardValue} {findCard.GetCardStringSuit()}");
-            }
-        }
+        //foreach (var i in duplicateGroup.Where(i => i.Value == 2))
+        //{
+        //    var findCards = cards.Where(card => card.CardIntValue() == i.Key);
+        //    foreach(var findCard in findCards)
+        //    {
+        //        UnityEngine.Debug.Log($"{findCard.CardValue} {findCard.GetCardStringSuit()}");
+        //    }
+        //}
 
         return pairCount >= 2 ? 3 : -1;
     }
