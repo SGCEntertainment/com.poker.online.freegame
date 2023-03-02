@@ -19,16 +19,6 @@ public class GameManager : MonoBehaviour
     private Room Room { get; set; }
     private List<Card> CardsForGame { get; set; }
 
-    public Sprite Shirt
-    {
-        get => deck.shirt;
-    }
-
-    private void Start()
-    {
-        StartGame();
-    }
-
     public void StartGame()
     {
         Transform parent = GameObject.Find("Environment").transform;
@@ -48,7 +38,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(nameof(GameCycle));
     }
 
-    public void RestartGame()
+    public void ExitRoom()
     {
         StopAllCoroutines();
 
@@ -56,8 +46,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Room.gameObject);
         }
-
-        StartGame();
     }
 
     public void Deal()
