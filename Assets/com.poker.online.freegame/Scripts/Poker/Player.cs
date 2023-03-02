@@ -88,11 +88,13 @@ public class Player : MonoBehaviour
         {
             yield return new WaitWhile(() => IsMyStep);
             GameManager.Instance.AddToPot(100);
+            SFXManager.Instance.PlayEffect(3);
             yield break;
         }
 
         Handler.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
+        SFXManager.Instance.PlayEffect(3);
         Handler.SetActive(false);
         GameManager.Instance.AddToPot(100);
     }

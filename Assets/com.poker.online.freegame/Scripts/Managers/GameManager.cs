@@ -144,7 +144,12 @@ public class GameManager : MonoBehaviour
                     yield return new WaitForSeconds(0.25f);
                 }
 
-                Debug.Log($"Winner: {GetWinner().Profile.name}");
+                Player winner = GetWinner();
+                Debug.Log($"winner: {winner.Profile.name}");
+
+                int idClip = string.Equals(winner.Profile.name, "You") ? 1 : 0;
+                SFXManager.Instance.PlayEffect(idClip);
+
                 yield return new WaitForSeconds(2.0f);
                 foreach (Player p in Room.players)
                 {
