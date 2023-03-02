@@ -50,7 +50,12 @@ public class GameManager : MonoBehaviour
 
     public void Deal()
     {
-        Player.IsMyStep = true;
+        if(!Player.IsMyStep)
+        {
+            return;
+        }
+
+        Player.IsMyStep = false;
     }
 
     public void AddToPot(int amount)
@@ -179,6 +184,7 @@ public class GameManager : MonoBehaviour
                 Room.streetId = 0;
             }
 
+            Player.IsMyStep = true;
             foreach (Player p in Room.players)
             {
                 yield return p.WaitPlayerTurn();
