@@ -4,7 +4,7 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     private int index = 0;
-    private List<Card> cards = new List<Card>();
+    public List<Card> cards = new List<Card>();
     public List<Card> Cards
     {
         get => cards;
@@ -19,5 +19,11 @@ public class Table : MonoBehaviour
 
             cards.AddRange(value);
         }
+    }
+
+    public void Clear()
+    {
+        index = 0;
+        cards.Clear();
     }
 }

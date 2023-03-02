@@ -18,7 +18,7 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        AddToPot(0);
+        ResetPot();
         transform.position += Vector3.down * 15.0f;
     }
 
@@ -31,6 +31,12 @@ public class Room : MonoBehaviour
     public void AddToPot(int amount)
     {
         potCount += amount;
+        potText.text = $"{potCount:N}";
+    }
+    
+    public void ResetPot()
+    {
+        potCount = 0;
         potText.text = $"{potCount:N}";
     }
 }

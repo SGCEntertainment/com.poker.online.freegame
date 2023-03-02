@@ -3,6 +3,7 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     private const float speed = 30.0f;
+    private bool IsDestinated { get; set; }
 
     public CardValue CardValue;
     public CardSuit CardSuit;
@@ -20,6 +21,12 @@ public class Card : MonoBehaviour
 
     private void Update()
     {
+        if(IsDestinated)
+        {
+            return;
+        }
+
         transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, speed * Time.deltaTime);
+        IsDestinated = Vector2.Distance(transform.position, transform.parent.position) < 0.1f;
     }
 }

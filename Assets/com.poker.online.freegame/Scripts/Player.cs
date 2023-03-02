@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
         float time = Random.Range(3, 5);
         Handler.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         Handler.SetActive(false);
         GameManager.Instance.AddToPot(100);
     }

@@ -152,7 +152,43 @@ public class GameManager : MonoBehaviour
                 }
 
                 Debug.Log($"Winner: {GetWinner().Profile.name}");
-                yield break;
+                yield return new WaitForSeconds(2.0f);
+                foreach (Player p in Room.players)
+                {
+                    p.Combination = string.Empty;
+                }
+
+                Card[] cards = FindObjectsOfType<Card>();
+                GameObject center = GameObject.Find("center");
+
+                foreach (Card card in cards)
+                {
+                    card.transform.up = transform.parent.up;
+                    card.transform.SetParent(center.transform);
+                    card.transform.localScale = new Vector3(0.8f, 0.8f, 1);
+
+                    while (card.transform.position != center.transform.position)
+                    {
+                        card.transform.position =
+                           Vector2.MoveTowards(card.transform.position, center.transform.position, 100.0f * Time.deltaTime);
+
+                        yield return null;
+                    }
+                }
+
+                foreach(Card c in cards)
+                {
+                    Destroy(c.gameObject);
+                }
+
+                Room.ResetPot();
+                CardsForGame = deck.Cards;
+                Room.table.Clear();
+
+                StopCoroutine(nameof(GameCycle));
+                StartCoroutine(nameof(GameCycle));
+
+                Room.streetId = 0;
             }
 
             foreach (Player p in Room.players)
