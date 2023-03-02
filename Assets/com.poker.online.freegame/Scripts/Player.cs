@@ -7,19 +7,20 @@ public class Player : MonoBehaviour
     public static bool IsMyStep;
     [SerializeField] bool IsBot;
 
-    private Card[] cards;
+    public Card[] cards;
     public Card[] Cards
     {
         get => cards;
 
         set
         {
+            Card[] _cards = new Card[2];
             for(int i = 0; i < value.Length; i++)
             {
-                Instantiate(value[i].gameObject, transform.GetChild(0).GetChild(i));
+                _cards[i] = Instantiate(value[i], transform.GetChild(0).GetChild(i));
             }
 
-            cards = value;
+            cards = _cards;
             HideCards(IsBot);
         }
     }

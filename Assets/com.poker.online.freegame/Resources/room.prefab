@@ -1254,6 +1254,10 @@ MonoBehaviour:
   players:
   - {fileID: 2823322585649513684}
   - {fileID: 2823322584750963598}
+  - {fileID: 4954869511157186407}
+  - {fileID: 2823322584809664317}
+  - {fileID: 2823322585747540384}
+  - {fileID: 1659320647132134016}
 --- !u!1 &2823322584446549136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,6 +1782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBot: 1
+  cards: []
 --- !u!1 &2823322584779730967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,7 +2000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2823322584809664314
 Transform:
   m_ObjectHideFlags: 0
@@ -2026,6 +2031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBot: 1
+  cards: []
 --- !u!1 &2823322584881401901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,6 +3049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBot: 0
+  cards: []
 --- !u!1 &2823322585670295767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3342,7 +3349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2823322585747540385
 Transform:
   m_ObjectHideFlags: 0
@@ -3373,6 +3380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBot: 1
+  cards: []
 --- !u!1 &2823322585754257274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3971,7 +3979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1475964913399478403
 Transform:
   m_ObjectHideFlags: 0
@@ -4002,6 +4010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBot: 1
+  cards: []
 --- !u!1 &3785367791764258668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4132,7 +4141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3452979219387051160
 Transform:
   m_ObjectHideFlags: 0
@@ -4163,6 +4172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBot: 1
+  cards: []
 --- !u!1 &4780398768885974363
 GameObject:
   m_ObjectHideFlags: 0
