@@ -33,6 +33,11 @@ public class Player : MonoBehaviour
         get => transform.GetChild(3);
     }
 
+    public Transform Bank
+    {
+        get => transform.GetChild(4);
+    }
+
     private Profile profile;
     public Profile Profile
     {
@@ -72,7 +77,6 @@ public class Player : MonoBehaviour
     {
         if(!IsBot)
         {
-            IsMyStep = true;
             profile = new Profile
             {
                 name = "You"

@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitRoom()
     {
+        PotChips.Clear();
         StopAllCoroutines();
 
         if(Room)
@@ -167,16 +168,19 @@ public class GameManager : MonoBehaviour
 
                 Player winner = GetWinner();
                 Debug.Log($"winner: {winner.Profile.name}");
-                foreach(Chip chip in PotChips)
-                {
-                    chip.transform.SetParent(winner.ChipHolder);
-                    chip.Target = winner.ChipHolder.position;
-                }
 
                 int idClip = string.Equals(winner.Profile.name, "You") ? 1 : 0;
                 SFXManager.Instance.PlayEffect(idClip);
 
-                yield return new WaitForSeconds(4.0f);
+                yield return new WaitForSeconds(2.0f);
+                foreach(Chip chip in PotChips)
+                {
+                    chip.transform.SetParent(winner.Bank);
+                    chip.Target = Vector2.zero;
+
+                    Destroy(chip.gameObject, 1.5f);
+                }
+
                 foreach (Player p in Room.players)
                 {
                     p.Combination = string.Empty;
@@ -205,11 +209,6 @@ public class GameManager : MonoBehaviour
                     Destroy(c.gameObject);
                 }
 
-                foreach (Chip chip in PotChips)
-                {
-                    Destroy(chip.gameObject);
-                }
-
                 CardsForGame = deck.Cards;
 
                 Room.table.Clear();
@@ -227,7 +226,7 @@ public class GameManager : MonoBehaviour
                 yield return p.WaitPlayerTurn();
             }
 
-            yield return null;
+            yield return new WaitForSeconds(1.0f);
         }
     }
 
@@ -256,6 +255,6 @@ public class GameManager : MonoBehaviour
         Room.streetId++;
         Room.table.Cards = cards.ToList();
 
-        yield return null;
+        yield return new WaitForSeconds(cardCount * 1.0f);
     }
 }

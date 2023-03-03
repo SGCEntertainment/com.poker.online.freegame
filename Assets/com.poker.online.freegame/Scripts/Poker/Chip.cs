@@ -6,6 +6,6 @@ public class Chip : MonoBehaviour
 
     private void Update()
     {
-        transform.localPosition = Vector2.MoveTowards(transform.localPosition, Target, 15.0f * Time.deltaTime);
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, Target, 25.0f * Time.deltaTime);
     }
 }
